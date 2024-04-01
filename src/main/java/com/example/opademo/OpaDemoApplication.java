@@ -6,29 +6,27 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @SpringBootApplication
 public class OpaDemoApplication implements ApplicationRunner {
-
 
     public static void main(String[] args) {
         SpringApplication.run(OpaDemoApplication.class, args);
     }
 
     @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
+    public WebClient.Builder webClientBuilder() {
+        return WebClient.builder();
     }
 
     @Bean
-    public OpaClient opaClient() {
-        return new OpaClient();
+    public OpaClient opaClient(WebClient.Builder webClientBuilder) {
+        return new OpaClient(webClientBuilder);
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        opaClient().loadPolicyFromFile("policies/policies.rego");
+        opaClient(webClientBuilder()).loadPolicyFromFile("policies/subscription.rego");
     }
 }
-

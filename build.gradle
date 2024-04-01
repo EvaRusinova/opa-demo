@@ -16,9 +16,22 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework:spring-web'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework:spring-webmvc:6.1.4'
+	//WebFlux
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+   //Jackson for JSON serialization/deserialization
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Lombok
+	compileOnly 'org.projectlombok:lombok:1.18.32'
+	annotationProcessor 'org.projectlombok:lombok:1.18.32'
+
+	testCompileOnly 'org.projectlombok:lombok:1.18.32'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
 }
 
 tasks.named('test') {
